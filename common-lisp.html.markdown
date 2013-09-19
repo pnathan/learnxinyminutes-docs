@@ -631,6 +631,47 @@ nil                  ; for false - and the empty list
 ;; variables declared in the macro can collide with variables used in
 ;; regular code.
 
+;;; Macros PART TWO.
+
+;; Most of the time macros are used as definitions or similar to
+;; Python's "context managers".
+
+;; Definition pattern
+
+;; This defines a counter closure.
+
+(defmacro defcounter (&optional (starter 0) (incrementer #'1+))
+  "A classic & boring closure example wrapped as a macro"
+  `(let ((counter ,starter)
+         (func ,incrementer))
+     (lambda ()
+       (setf counter (funcall func counter)))))
+
+(let ((counter (defcounter "a"
+             (lambda (x) (concatenate 'string "a" x)))))
+  (funcall counter)
+  (funcall counter))
+
+;; => "aaa"
+
+;; With- pattern
+(defmacro with-wrapper ((initializer) &body body)
+  "A context manager; always tries to initialize; regardless if
+ anything goes wrong, a cleanup will happen"
+  `(progn
+     (format t "~&Initializing with ~a~%" ,initializer)
+     (unwind-protect
+          (progn
+            ,@body)
+       (format t "~&cleaning up~%"))))
+
+;; =>
+;; CL-USER> (with-wrapper ("Starter") (+ 1 1))
+;; Initializing with Starter
+;; cleaning up
+;; 2
+
+
 ;; See Practical Common Lisp for more information on macros.
 ```
 
