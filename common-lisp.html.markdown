@@ -25,8 +25,10 @@ Another popular and recent book is
 
 ;;; General form.
 
-;; Lisp has two fundamental pieces of syntax: the ATOM and the
-;; S-expression. Typically, grouped S-expressions are called `forms`.
+;; Historically, Lisp has two fundamental pieces of syntax: the ATOM
+;; and the S-expression.
+
+;; An ATOM is traditionally a symbol
 
 10  ; an atom; it evaluates to itself
 
@@ -34,10 +36,34 @@ Another popular and recent book is
 
 t  ; another atom, denoting true.
 
-(+ 1 2 3 4) ; an s-expression
+nil  ; another atom, denoting false.
+
+;; Atoms are S-expressions
+;; Combinations of atoms in pairs are s-expressions
+
+AB  ; an s-expression
+
+;; If we cons, or construct, a pair...
+
+(cons 1  2)
+
+; =>  (1 . 2) -- we now have a pair
+
+;; We can keep consing:
+
+(cons 1  (cons 2 (cons 3 nil)))
+
+;; => (1 2 3) ; an s-expression - this time we tacked a NIL at the end
+;; and made it what's known a a "proper list"; these are what's
+;; usually used.
+
+'(+ 1 2 3 4) ; an s-expression with a quote to allow us to return itself
+
+; => (+ 1 2 3 4)
 
 '(4 :foo  t)  ;another one
 
+; => (4 :foo  t)
 
 ;;; Comments
 
