@@ -17,7 +17,7 @@ Another popular and recent book is
 
 
 
-```scheme
+```commonlisp
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 0. Syntax
@@ -260,7 +260,7 @@ nil                  ; for false - and the empty list
 
 (defparameter *adjvec* (make-array '(3) :initial-contents '(1 2 3)
       :adjustable t :fill-pointer t))
-      
+
 *adjvec* ; => #(1 2 3)
 
 ;; Adding new element:
@@ -377,7 +377,7 @@ nil                  ; for false - and the empty list
 ;; 4. Equality
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Common Lisp has a sophisticated equality system. A couple are covered yere.
+;; Common Lisp has a sophisticated equality system. A couple are covered here.
 
 ;; for numbers use `='
 (= 3 3.0) ; => t
